@@ -7,8 +7,15 @@ export interface IResource {
   timestamp: string;
 }
 
-export interface IState {
+export interface IMainState {
   arrayOfAllResources: IResource[];
   pageToDisplay: "homepage" | "resourcePage";
-  idOfResourceToDisplay: number | null;
+  idOfResourceToEditOrNull: number | null
+}
+
+export interface IInputState {
+  titleInput: string,
+  typeInput: string,
+  linkInput: string,
+  messageInput: string,
 }

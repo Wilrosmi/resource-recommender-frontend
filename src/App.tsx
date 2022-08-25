@@ -1,28 +1,33 @@
 import { useState, useEffect } from "react";
-import { IResource, IState } from "./utils/types";
+import { IResource, IMainState } from "./utils/types";
 import Homepage from "./components/Homepage";
 import SubmitResourcePage from "./components/SubmitResourcePage";
 import serverUrl from "./utils/serverUrl";
 import axios from "axios";
 
 function App(): JSX.Element {
-  const [state, setState] = useState<IState>({
+  const [mainState, setMainState] = useState<IMainState>({
     arrayOfAllResources: [],
     pageToDisplay: "homepage",
-    idOfResourceToDisplay: null,
+    idOfResourceToEditOrNull: null
   });
   // Need to add the ability to deal with failures in the api call
   useEffect(() => {
     async function getAllResourcesAndAssignToState(): Promise<void> {
-      const resourcesFromApi: IResource[] = (await axios.get(serverUrl)).data;
-      setState((state) => {
-        const newState = {...state}
+      const resourcesFromApi: IResource[] = (await axios.get(`${serverUrl}/rec`)).data.data;
+      setMainState((state) => {
+        const newState = { ...state };
         newState.arrayOfAllResources = resourcesFromApi;
         return newState;
-      })
-    }  
+      });
+    }
+    getAllResourcesAndAssignToState();
   }, []);
-  return state.pageToDisplay === "homepage" ? <Homepage state={state} /> : <SubmitResourcePage state={state} />;
+  return mainState.pageToDisplay === "homepage" ? (
+    <Homepage mainState={mainState} setMainState={setMainState} />
+  ) : (
+    <SubmitResourcePage mainState={mainState} setMainState={setMainState} />
+  );
 }
 
 export default App;
