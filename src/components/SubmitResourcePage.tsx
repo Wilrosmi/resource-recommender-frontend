@@ -70,24 +70,24 @@ function SubmitResourcePage({ mainState, setMainState }: IProps): JSX.Element {
   }
   return (
     <>
-      <input
+      <input className="input"
         value={inputState.titleInput}
         onChange={(e) => updateStateOnInputChange(e, "titleInput")}
       />
-      <input
+      <input className="input"
         value={inputState.typeInput}
         onChange={(e) => updateStateOnInputChange(e, "typeInput")}
       />
-      <input
+      <input className="input"
         value={inputState.linkInput}
         onChange={(e) => updateStateOnInputChange(e, "linkInput")}
       />
-      <input
+      <input className="input"
         value={inputState.messageInput}
         onChange={(e) => updateStateOnInputChange(e, "messageInput")}
       />
-      <button onClick={handleSubmitClick}>Submit</button>
-      <button onClick={handleReturnClick}>Return to Homepage</button>
+      <button id="submit-button" onClick={handleSubmitClick}>Submit</button>
+      <button id="return-button" onClick={handleReturnClick}>Return to Homepage</button>
     </>
   );
 }

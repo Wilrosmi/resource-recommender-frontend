@@ -18,8 +18,8 @@ function Homepage({ mainState, setMainState }: IProps): JSX.Element {
   }
   return (
     <>
-      <h1>Resource Recommender</h1>
-      <button onClick={handleNewResourceButtonClick}>
+      <h1 id="page-title">Resource Recommender</h1>
+      <button id="create-button" onClick={handleNewResourceButtonClick}>
         Create New Resource
       </button>
       {arrayOfAllResources.map((res) => (

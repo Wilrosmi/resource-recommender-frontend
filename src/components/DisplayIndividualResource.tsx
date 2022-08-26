@@ -32,15 +32,15 @@ function DisplayIndividualResource({
     });
   }
   return (
-    <>
-      <h1>{resource.title}</h1>
-      <h3>{resource.type}</h3>
-      <h3>{resource.link}</h3>
-      <p>{resource.message ?? ""}</p>
-      <p>{resource.time}</p>
-      <button onClick={onEditClick}>Edit Resource</button>
-      <button onClick={onDeleteClick}>Delete Resource</button>
-    </>
+    <div className="resource">
+      <h1 className="res-title">{resource.title}</h1>
+      <h3 className="res-type">{resource.type}</h3>
+      <h3 className="res-link">{resource.link}</h3>
+      <p className="res-message">{resource.message ?? ""}</p>
+      <p className="res-time">{resource.time}</p>
+      <button className="res-edit" onClick={onEditClick}>Edit Resource</button>
+      <button className="res-delete" onClick={onDeleteClick}>Delete Resource</button>
+    </div>
   );
 }
 
