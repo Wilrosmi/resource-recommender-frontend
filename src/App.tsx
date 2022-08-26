@@ -9,12 +9,14 @@ function App(): JSX.Element {
   const [mainState, setMainState] = useState<IMainState>({
     arrayOfAllResources: [],
     pageToDisplay: "homepage",
-    idOfResourceToEditOrNull: null
+    idOfResourceToEditOrNull: null,
   });
   // Need to add the ability to deal with failures in the api call
   useEffect(() => {
     async function getAllResourcesAndAssignToState(): Promise<void> {
-      const resourcesFromApi: IResource[] = (await axios.get(`${serverUrl}/rec`)).data.data;
+      const resourcesFromApi: IResource[] = (
+        await axios.get(`${serverUrl}/rec`)
+      ).data.data;
       setMainState((state) => {
         const newState = { ...state };
         newState.arrayOfAllResources = resourcesFromApi;
