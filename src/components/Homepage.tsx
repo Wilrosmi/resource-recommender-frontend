@@ -1,5 +1,9 @@
 import { IMainState } from "../utils/types";
 import DisplayIndividualResource from "./DisplayIndividualResource";
+import ColumnHeaders from "./ColumnHeaders";
+import { useState } from "react";
+import SearchFilter from "./SearchFilter";
+import filterBySearchTerm from "../utils/filterBySearchTerm";
 
 interface IProps {
   mainState: IMainState;
@@ -7,8 +11,13 @@ interface IProps {
 }
 
 function Homepage({ mainState, setMainState }: IProps): JSX.Element {
+  const [searchState, setSearchState] = useState("");
+
   const { arrayOfAllResources } = mainState;
-  console.log("arrayOfAllResources: ", arrayOfAllResources);
+  const filteredResources = filterBySearchTerm(
+    arrayOfAllResources,
+    searchState
+  );
   function handleNewResourceButtonClick(): void {
     setMainState((state) => {
       const newState = { ...state };
@@ -18,18 +27,24 @@ function Homepage({ mainState, setMainState }: IProps): JSX.Element {
   }
   return (
     <>
-      <h1 id="page-title">Resource Recommender</h1>
-      <button id="create-button" onClick={handleNewResourceButtonClick}>
-        Create New Resource
-      </button>
-      {arrayOfAllResources.map((res) => (
-        <DisplayIndividualResource
-          key={res.id}
-          resource={res}
-          mainState={mainState}
-          setMainState={setMainState}
-        />
-      ))}
+      <div id="homepage-head">
+        <h1 id="page-title">Resource Recommendations</h1>
+        <button id="create-button" onClick={handleNewResourceButtonClick}>
+          Create New Resource
+        </button>
+      </div>
+      <SearchFilter searchState={searchState} setSearchState={setSearchState} />
+      <ColumnHeaders />
+      <div id="all-resources">
+        {filteredResources.map((res) => (
+          <DisplayIndividualResource
+            key={res.id}
+            resource={res}
+            mainState={mainState}
+            setMainState={setMainState}
+          />
+        ))}
+      </div>
     </>
   );
 }

@@ -12,27 +12,27 @@ interface IProps {
 function SubmitResourcePage({ mainState, setMainState }: IProps): JSX.Element {
   const { arrayOfAllResources, idOfResourceToEditOrNull } = mainState;
   const [inputState, setInputState] = useState<IInputState>({
-    titleInput: "",
+    descriptionInput: "",
     typeInput: "",
     linkInput: "",
-    messageInput: "",
+    likes: 0,
   });
   useEffect(() => {
     const resourceToEdit = getResourceById(
       arrayOfAllResources,
       idOfResourceToEditOrNull
     );
-    const { title, type, link, message } = resourceToEdit;
+    const { description, type, link, likes } = resourceToEdit;
     setInputState({
-      titleInput: title,
+      descriptionInput: description,
       typeInput: type,
       linkInput: link,
-      messageInput: message ?? "",
+      likes: likes,
     });
   }, [arrayOfAllResources, idOfResourceToEditOrNull]);
   function updateStateOnInputChange(
     event: React.ChangeEvent<HTMLInputElement>,
-    valueToChange: keyof IInputState
+    valueToChange: "descriptionInput" | "linkInput" | "typeInput"
   ): void {
     setInputState((state) => {
       const newState = { ...state };
@@ -42,10 +42,10 @@ function SubmitResourcePage({ mainState, setMainState }: IProps): JSX.Element {
   }
   async function handleSubmitClick(): Promise<void> {
     const reqBody = {
-      title: inputState.titleInput,
+      description: inputState.descriptionInput,
       type: inputState.typeInput,
       link: inputState.linkInput,
-      message: inputState.messageInput,
+      likes: inputState.likes,
     };
     if (idOfResourceToEditOrNull === null) {
       await axios.post(`${serverUrl}/rec`, reqBody);
@@ -70,24 +70,43 @@ function SubmitResourcePage({ mainState, setMainState }: IProps): JSX.Element {
   }
   return (
     <>
-      <input className="input"
-        value={inputState.titleInput}
-        onChange={(e) => updateStateOnInputChange(e, "titleInput")}
-      />
-      <input className="input"
-        value={inputState.typeInput}
-        onChange={(e) => updateStateOnInputChange(e, "typeInput")}
-      />
-      <input className="input"
-        value={inputState.linkInput}
-        onChange={(e) => updateStateOnInputChange(e, "linkInput")}
-      />
-      <input className="input"
-        value={inputState.messageInput}
-        onChange={(e) => updateStateOnInputChange(e, "messageInput")}
-      />
-      <button id="submit-button" onClick={handleSubmitClick}>Submit</button>
-      <button id="return-button" onClick={handleReturnClick}>Return to Homepage</button>
+      <div id="inputs">
+        <label className="label" id="desc-label" htmlFor="description">
+          Description:{" "}
+        </label>
+        <input
+          className="input"
+          name="description"
+          value={inputState.descriptionInput}
+          onChange={(e) => updateStateOnInputChange(e, "descriptionInput")}
+        />
+        <label className="label" id="type-label" htmlFor="type">
+          Topic:{" "}
+        </label>
+        <input
+          className="input"
+          name="type"
+          value={inputState.typeInput}
+          onChange={(e) => updateStateOnInputChange(e, "typeInput")}
+        />
+        <label className="label" id="link-label" htmlFor="link">
+          Link:{" "}
+        </label>
+        <input
+          className="input"
+          name="link"
+          value={inputState.linkInput}
+          onChange={(e) => updateStateOnInputChange(e, "linkInput")}
+        />
+      </div>
+      <div id="input-buttons">
+        <button id="return-button" onClick={handleReturnClick}>
+          Return to Homepage
+        </button>
+        <button id="submit-button" onClick={handleSubmitClick}>
+          Submit
+        </button>
+      </div>
     </>
   );
 }
