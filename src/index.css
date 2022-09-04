@@ -1,0 +1,130 @@
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#page-title {
+  display: inline;
+  float: left;
+  margin: 2vh 2vw;
+  font-size: 1.5rem;
+}
+
+.likes-tally,
+.like-button {
+  display: inline-block;
+  margin: 1vw;
+}
+
+#create-button {
+  display: inline;
+  float: right;
+  margin: 2vh 2vw;
+  padding: 1.5vh;
+  border-radius: 20vh;
+  border-style: solid;
+  height: 6vh;
+}
+
+.edit,
+.delete,
+#return-button,
+#submit-button {
+  height: 7vh;
+  border-style: solid;
+  border-radius: 20vh;
+  padding: 1.5vh;
+}
+
+.edit,
+.like-button {
+  border-color: grey;
+}
+
+.like-button {
+  font-size: 0.75rem;
+  height: 5vh;
+  border-style: solid;
+  border-radius: 10vh;
+  padding: 0.75vh;
+}
+
+.delete {
+  border-color: crimson;
+}
+
+#homepage-head {
+  background-color: thistle;
+  height: 10vh;
+  border-bottom: 0.2vh solid black;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  opacity: 1;
+  z-index: 2;
+}
+
+.resource,
+#column-headers {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 80%;
+  column-gap: 1vw;
+  text-align: center;
+  border-top: 0.2vh solid black;
+  border-bottom: 0.2vh solid black;
+  margin: 2vh auto;
+}
+
+#column-headers {
+  top: 10vh;
+  position: relative;
+  z-index: 1;
+}
+
+#all-resources {
+  position: relative;
+  top: 10vh;
+  z-index: 1;
+}
+
+.res {
+  place-self: center;
+}
+
+#inputs {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  width: 60%;
+  height: 60%;
+  position: absolute;
+  left: 20%;
+  top: 10%;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+#input-buttons {
+  position: absolute;
+  top: 80%;
+  left: 20%;
+  width: 60%;
+  padding: 20px;
+}
+
+#submit-button {
+  position: absolute;
+  right: 0%;
+}
+
+#search-bar {
+  position: relative;
+  top: 10vh;
+  margin-top: 2vh;
+  margin-right: auto;
+  margin-left: auto;
+  width: 20vw;
+  left: 40vw;
+}

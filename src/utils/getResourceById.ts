@@ -7,11 +7,11 @@ function getResourceById(
   const resource = allResources.find((res) => res.id === id);
   if (resource === undefined) {
     const emptyResource: IResource = {
-      title: "",
+      description: "",
       type: "",
       link: "",
-      message: "",
       time: "",
+      likes: 0,
       id: -1,
     };
     return emptyResource;

@@ -1,9 +1,9 @@
 export interface IResource {
-  title: string;
+  description: string;
   type: string;
   link: string;
-  message: string | null;
   id: number;
+  likes: number;
   time: string;
 }
 
@@ -14,8 +14,8 @@ export interface IMainState {
 }
 
 export interface IInputState {
-  titleInput: string;
+  descriptionInput: string;
   typeInput: string;
   linkInput: string;
-  messageInput: string;
+  likes: number;
 }
