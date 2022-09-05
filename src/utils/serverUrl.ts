@@ -1,3 +1,3 @@
-const serverUrl = "http://localhost:5000";
+const serverUrl = "https://resource-recommendations-backe.herokuapp.com";
 
 export default serverUrl;
